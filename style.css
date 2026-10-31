@@ -1,0 +1,39 @@
+/* Site de NoteFarm : thème Jade impérial, clair et sombre comme l'app. */
+@font-face { font-family: "Fraunces"; src: url("polices/Fraunces.ttf"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Albert Sans"; src: url("polices/AlbertSans.ttf"); font-weight: 100 900; font-display: swap; }
+
+:root {
+  --fond: #EEF2EE; --surface: #FAFBF9; --filet: #D3DDD6;
+  --encre: #17221E; --texte: #3E4A45; --attenue: #5D6B65;
+  --jade: #2F5D50; --jade-texte: #24493F; --laiton: #9A7A45; --sauge: #8FAF9F;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fond: #0E1714; --surface: #16211D; --filet: #2C3A35;
+    --encre: #E3EBE6; --texte: #BCC8C2; --attenue: #9AAAA2;
+    --jade: #7FB8A4; --jade-texte: #A6D1C1; --laiton: #C9A66B; --sauge: #4E7A69;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--fond); color: var(--texte);
+  font: 400 17px/1.65 "Albert Sans", system-ui, sans-serif;
+}
+main { max-width: 720px; margin: 0 auto; padding: 56px 20px 80px; }
+h1, h2 { font-family: "Fraunces", Georgia, serif; font-variation-settings: "SOFT" 100; color: var(--encre); font-weight: 600; }
+h1 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 8px; }
+h2 { font-size: 1.35rem; margin: 40px 0 10px; }
+a { color: var(--jade-texte); }
+strong { color: var(--encre); }
+.date { color: var(--attenue); margin: 0 0 32px; }
+.filet { width: 36px; height: 1px; background: var(--laiton); margin: 16px 0; border: 0; }
+.bref { background: var(--surface); border: 1px solid var(--filet); border-radius: 18px; padding: 8px 24px; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.95rem; }
+th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--filet); }
+th { color: var(--encre); font-weight: 600; }
+.accueil { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.accueil svg { width: 112px; height: 112px; }
+.devise { color: var(--attenue); letter-spacing: 0.06em; }
+.liens { margin-top: 32px; display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+footer { margin-top: 56px; color: var(--attenue); font-size: 0.9rem; }
