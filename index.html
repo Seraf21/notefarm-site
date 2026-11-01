@@ -2,28 +2,599 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NoteFarm</title>
-<meta name="description" content="NoteFarm, l'app de notes et de révision pour les étudiants. Réviser. Retenir. Grandir.">
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NoteFarm · Notes et révision pour les étudiants</title>
+<meta name="description" content="Tu écris ton cours, tu caches un mot : c'est déjà une carte. NoteFarm te la repropose au bon moment, jusqu'au jour de l'examen. Bientôt sur Android et iPhone.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#EEF2EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1714" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://notefarm.app/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="NoteFarm">
+<meta property="og:title" content="NoteFarm · Réviser. Retenir. Grandir.">
+<meta property="og:description" content="Tu écris ton cours, tu caches un mot : c'est déjà une carte. NoteFarm te la repropose au bon moment, jusqu'au jour de l'examen.">
+<meta property="og:url" content="https://notefarm.app/">
+<link rel="preload" href="polices/Fraunces.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="polices/AlbertSans.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="vitrine.css">
+<script>
+  // Le mouvement n'est préparé que si l'appareil ne demande pas moins d'animations.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('anime');
+</script>
 </head>
 <body>
-<main class="accueil">
-  <svg viewBox="22 10 86 96" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M72 22 H34 A8 8 0 0 0 26 30 V94 A8 8 0 0 0 34 102 H86 A8 8 0 0 0 94 94 V44" stroke="var(--jade)" stroke-width="7"/>
-    <path d="M40 62 H72" stroke="var(--sauge)" stroke-width="6"/>
-    <path d="M40 78 H64" stroke="var(--sauge)" stroke-width="6"/>
-    <path d="M74 42 C72 24 84 12 104 10 C106 30 94 42 74 42 Z" fill="var(--laiton)"/>
-  </svg>
-  <h1>NoteFarm</h1>
-  <hr class="filet">
-  <p class="devise">Réviser. Retenir. Grandir.</p>
-  <p>Notes, cartes et révision espacée pour les étudiants.<br>Bientôt sur Android, iPhone, Mac et Windows.</p>
-  <div class="liens">
-    <a href="confidentialite.html">Politique de confidentialité</a>
-    <a href="mentions-legales.html">Mentions légales</a>
-    <a href="mailto:contact@notefarm.app">contact@notefarm.app</a>
+<a class="evitement" href="#contenu">Aller au contenu</a>
+
+<!-- Dessins communs : icônes des onglets de l'app (piste A, lib/navigation/icones.dart,
+     grille de 24, trait de 1,8) et pictogrammes des plateformes. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="embleme" viewBox="22 10 86 96">
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M72 22 H34 A8 8 0 0 0 26 30 V94 A8 8 0 0 0 34 102 H86 A8 8 0 0 0 94 94 V44" stroke="var(--jade)" stroke-width="8"/>
+        <path d="M40 62 H72 M40 78 H64" stroke="var(--sauge)" stroke-width="7"/>
+        <path d="M74 42 C72 24 84 12 104 10 C106 30 94 42 74 42 Z" fill="var(--laiton)"/>
+      </g>
+    </symbol>
+    <symbol id="o-accueil" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21V11"/>
+        <path d="M12 15C8 15 5 12.5 5 8.5C9 8.5 12 11 12 15Z" fill="var(--o-plein)"/>
+        <path d="M12 11C12 7 14.8 4 19 4C19 8 16 11 12 11Z" fill="var(--o-laiton)"/>
+      </g>
+    </symbol>
+    <symbol id="o-notes" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 3H14L19 8V20A1 1 0 0 1 18 21H7A1 1 0 0 1 6 20V4A1 1 0 0 1 7 3Z" fill="var(--o-plein)"/>
+        <path d="M14 3V8H19M9 16.5H13.5"/>
+        <path d="M9 12.5H16" stroke="var(--o-trait-laiton)"/>
+      </g>
+    </symbol>
+    <symbol id="o-reviser" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="8" width="12" height="13" rx="2" fill="var(--o-plein)"/>
+        <path d="M9 3.5H16.5A4 4 0 0 1 20.5 7.5V14M18 11.5L20.5 14L23 11.5" stroke="var(--o-trait-laiton)"/>
+        <path d="M7 13H11M7 16.5H10"/>
+      </g>
+    </symbol>
+    <symbol id="o-focus" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="8" fill="var(--o-plein)" stroke-opacity=".35"/>
+        <path d="M12 4A8 8 0 0 1 19.6 14.5"/>
+        <circle cx="12" cy="12" r="2.2" fill="var(--o-laiton)"/>
+      </g>
+    </symbol>
+    <symbol id="o-collection" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3.5" y="6" width="10" height="14" rx="2" transform="rotate(-12 8.5 13)"/>
+        <rect x="10" y="4" width="10" height="14" rx="2" fill="var(--surface)" stroke="none"/>
+        <rect x="10" y="4" width="10" height="14" rx="2" fill="var(--o-plein)"/>
+        <path d="M15 7.5L17.2 11L15 14.5L12.8 11Z" fill="var(--o-laiton)"/>
+      </g>
+    </symbol>
+    <!-- Plateformes : pictogrammes neutres, sans logo de marque (voir mentions légales). -->
+    <symbol id="p-android" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="2.5" width="12" height="19" rx="2.5"/><circle cx="12" cy="5.4" r=".7" fill="currentColor"/><path d="M10 18.5h4"/>
+      </g>
+    </symbol>
+    <symbol id="p-iphone" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="2.5" width="12" height="19" rx="3.2"/><path d="M10.6 5.3h2.8"/>
+      </g>
+    </symbol>
+    <symbol id="p-mac" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4.5" y="5" width="15" height="10.5" rx="1.5"/><path d="M2.5 18.5h19"/>
+      </g>
+    </symbol>
+    <symbol id="p-windows" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8.5 20h7"/>
+      </g>
+    </symbol>
+    <symbol id="p-web" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.7 5.5 3.7 9s-1.3 6.5-3.7 9c-2.4-2.5-3.7-5.5-3.7-9S9.6 5.5 12 3Z"/>
+      </g>
+    </symbol>
+    <symbol id="p-synchro" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19.5 9A8 8 0 0 0 5.2 7M4.5 3.5V7.5h4M4.5 15a8 8 0 0 0 14.3 2M19.5 20.5v-4h-4"/>
+      </g>
+    </symbol>
+    <symbol id="p-promo" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="7" y="7" width="13" height="13" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/><path d="M10.5 13.5l2 2 4-4.5"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="entete" id="entete">
+  <div class="enveloppe">
+    <a class="marque" href="#haut" aria-label="NoteFarm, retour en haut">
+      <svg aria-hidden="true"><use href="#embleme"/></svg>
+      <span>NoteFarm</span>
+    </a>
+    <nav class="menu" aria-label="Sections de la page">
+      <a href="#recit">Comment ça marche</a>
+      <a href="#memoire">Révision</a>
+      <a href="#focus">Focus</a>
+      <a href="#collection">Collection</a>
+      <a href="#confiance">Vie privée</a>
+    </nav>
+    <a class="bouton petit" href="#beta">Rejoindre la bêta</a>
   </div>
+</header>
+
+<main id="haut">
+  <span id="contenu"></span>
+
+  <!-- Ouverture -->
+  <section class="ouverture" aria-labelledby="titre-ouverture">
+    <div class="enveloppe">
+      <div>
+        <p class="surtitre">Notes et révision, pour les étudiants</p>
+        <h1 id="titre-ouverture"><span class="ligne"><span>Réviser.</span></span> <span class="ligne"><span>Retenir.</span></span> <span class="ligne"><span>Grandir.</span></span></h1>
+        <p class="accroche">Tu écris ton cours, tu caches un mot : c'est déjà une carte. NoteFarm te la repropose au bon moment, pour que le jour de l'examen, tu saches ce que tu sais.</p>
+        <div class="actions">
+          <a class="bouton" href="#beta">Rejoindre la bêta</a>
+          <a class="bouton discret" href="#recit">Voir comment ça marche <span class="fleche" aria-hidden="true">↓</span></a>
+        </div>
+        <div class="disponible">
+          <span>D'abord sur</span>
+          <span class="puce-plateforme"><svg aria-hidden="true"><use href="#p-android"/></svg>Android</span>
+          <span class="puce-plateforme"><svg aria-hidden="true"><use href="#p-iphone"/></svg>iPhone</span>
+        </div>
+        <p class="note-bas">Tes notes restent chez toi, sur ton téléphone.</p>
+      </div>
+      <div class="scene" id="scene" aria-hidden="true">
+        <svg class="embleme-geant embleme-trace" viewBox="22 10 86 96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path class="trait" pathLength="1" d="M72 22 H34 A8 8 0 0 0 26 30 V94 A8 8 0 0 0 34 102 H86 A8 8 0 0 0 94 94 V44" stroke="var(--jade)" stroke-width="3"/>
+          <path class="trait" pathLength="1" d="M40 62 H72 M40 78 H64" stroke="var(--jade)" stroke-width="3"/>
+          <path class="feuille" d="M74 42 C72 24 84 12 104 10 C106 30 94 42 74 42 Z" fill="var(--laiton)"/>
+        </svg>
+        <div class="inclinable" id="inclinable">
+          <div class="telephone">
+            <div class="ecran">
+              <div class="ecran-haut"><span>10:24</span><span>Histoire</span></div>
+              <div class="vue">
+                <span class="chemin">Histoire contemporaine · Chapitre 2</span>
+                <h4>La révolution industrielle</h4>
+                <p>Elle commence en <b>Grande-Bretagne</b> à la fin du XVIII<sup>e</sup> siècle.</p>
+                <h5>Les innovations</h5>
+                <ul>
+                  <li>En <span class="trou" id="trou-ouverture">1769</span>, James Watt dépose le brevet de sa machine à vapeur.</li>
+                  <li>La ligne Liverpool–Manchester ouvre en <span class="trou">1830</span>.</li>
+                </ul>
+                <p><b>Exode rural</b> : départ des habitants des campagnes vers les villes.</p>
+                <div class="onglets"><span><svg><use href="#o-accueil"/></svg>Accueil</span><span class="actif"><svg><use href="#o-notes"/></svg>Notes</span><span><svg><use href="#o-reviser"/></svg>Réviser</span><span><svg><use href="#o-focus"/></svg>Focus</span><span><svg><use href="#o-collection"/></svg>Collection</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="carte-volante">
+            <span class="surtitre">Nouvelle carte</span>
+            <p>En quelle année James Watt dépose-t-il le brevet de sa machine à vapeur ?</p>
+            <span class="trou">1769</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="indice-defiler" aria-hidden="true"></span>
+  </section>
+
+  <!-- Récit -->
+  <section class="recit" id="recit" aria-labelledby="titre-recit">
+    <div class="enveloppe">
+      <div class="recit-tete">
+        <p class="surtitre revele">Comment ça marche</p>
+        <h2 class="eclaire" id="titre-recit">Du cours à la mémoire, sans rien recopier.</h2>
+        <p class="revele">Tu prends tes notes comme d'habitude. NoteFarm en fait des cartes, puis s'occupe de te les faire réviser.</p>
+      </div>
+      <div class="recit-grille">
+        <div class="etapes" id="etapes">
+          <article class="etape active" data-vue="1">
+            <span class="numero">Écrire</span>
+            <h3>Un vrai carnet de cours.</h3>
+            <p>Titres, listes, gras, encadrés, images : ton cours prend forme sous tes doigts, sans aucun code à retenir. Chaque matière a son classeur, et la recherche retrouve tout.</p>
+            <p class="detail">Tes notes en Markdown s'importent aussi.</p>
+          </article>
+          <article class="etape" data-vue="2">
+            <span class="numero">Cacher</span>
+            <h3>Cache un mot, c'est une carte.</h3>
+            <p>Une date qui te résiste, un nom qui t'échappe ? Touche-le : il se cache, et le voilà devenu une carte, au milieu de ta note. Plus besoin de recopier des fiches le soir.</p>
+            <p class="detail">Si tu corriges ton cours, la carte suit.</p>
+          </article>
+          <article class="etape" data-vue="3">
+            <span class="numero">Réviser</span>
+            <h3>Chaque carte revient au bon moment.</h3>
+            <p>Après chaque carte, tu dis si c'était facile ou non. NoteFarm te la repropose juste avant que tu l'oublies : ni trop tôt, ni trop tard.</p>
+            <p class="detail">Le calcul est fait par FSRS, un algorithme de révision espacée. Toi, tu révises quelques minutes par jour, à ton rythme.</p>
+          </article>
+          <article class="etape" data-vue="4">
+            <span class="numero">Jour J</span>
+            <h3>Sache où tu en es avant l'examen.</h3>
+            <p>Indique la date de ton partiel. NoteFarm répartit tes cartes jusqu'au jour J et te montre ce que tu auras retenu si tu suis le plan. La veille, tu sais ce qu'il te reste à revoir.</p>
+            <p class="detail">Une estimation, pas une note : elle s'ajuste à chaque révision.</p>
+          </article>
+        </div>
+
+        <div class="collant" id="collant" data-etape="1" aria-hidden="true">
+          <div class="telephone">
+            <div class="ecran">
+              <div class="ecran-haut"><span>10:24</span><span class="etat-ecran">Notes</span></div>
+
+              <div class="vue vue-1">
+                <span class="chemin">Économie · Chapitre 4</span>
+                <h4>L'inflation</h4>
+                <p>Hausse <b>durable et générale</b> du niveau des prix.</p>
+                <h5>Mesure</h5>
+                <ul>
+                  <li>En France, l'Insee la mesure avec l'<b>indice des prix à la consommation</b>.</li>
+                  <li>La BCE vise une inflation de <b>2 %</b> à moyen terme.</li>
+                </ul>
+                <h5>Causes</h5>
+                <p><span class="frappe" data-texte="Demande supérieure à l'offre, hausse des coûts de production.">Demande supérieure à l'offre, hausse des coûts de production.</span><span class="curseur"></span></p>
+                <div class="onglets"><span><svg><use href="#o-accueil"/></svg>Accueil</span><span class="actif"><svg><use href="#o-notes"/></svg>Notes</span><span><svg><use href="#o-reviser"/></svg>Réviser</span><span><svg><use href="#o-focus"/></svg>Focus</span><span><svg><use href="#o-collection"/></svg>Collection</span></div>
+              </div>
+
+              <div class="vue vue-2">
+                <span class="chemin">Économie · Chapitre 4</span>
+                <h4>L'inflation</h4>
+                <p>Hausse <b>durable et générale</b> du niveau des prix.</p>
+                <h5>Mesure</h5>
+                <ul>
+                  <li>En France, l'Insee la mesure avec l'<span class="trou cache">indice des prix à la consommation</span>.</li>
+                  <li>La BCE vise une inflation de <span class="trou cache">2 %</span> à moyen terme.</li>
+                </ul>
+                <div class="bulle-carte"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#o-reviser"/></svg>2 cartes créées dans ce cours</div>
+                <div class="onglets"><span><svg><use href="#o-accueil"/></svg>Accueil</span><span class="actif"><svg><use href="#o-notes"/></svg>Notes</span><span><svg><use href="#o-reviser"/></svg>Réviser</span><span><svg><use href="#o-focus"/></svg>Focus</span><span><svg><use href="#o-collection"/></svg>Collection</span></div>
+              </div>
+
+              <div class="vue vue-3">
+                <span class="chemin">Révision du jour · 14 sur 36</span>
+                <div class="progression"><i></i></div>
+                <div class="flash">
+                  <span class="surtitre" style="font-size:10px">Économie</span>
+                  <p class="question">Quel taux d'inflation la BCE vise-t-elle à moyen terme ?</p>
+                  <p class="reponse">2 %</p>
+                </div>
+                <div class="notes-boutons"><span>Encore</span><span>Difficile</span><span>Bien</span><span>Facile</span></div>
+                <div class="onglets"><span><svg><use href="#o-accueil"/></svg>Accueil</span><span><svg><use href="#o-notes"/></svg>Notes</span><span class="actif"><svg><use href="#o-reviser"/></svg>Réviser</span><span><svg><use href="#o-focus"/></svg>Focus</span><span><svg><use href="#o-collection"/></svg>Collection</span></div>
+              </div>
+
+              <div class="vue vue-4">
+                <span class="chemin">Partiel de macroéconomie · 14 janvier</span>
+                <div class="jourj-compte"><b class="compte-jours">J-12</b><span class="attenue">jours</span></div>
+                <div class="jourj-estim">
+                  <span class="attenue" style="font-size:11px">Mémorisation estimée si tu suis le plan</span>
+                  <span class="chiffre">84 %</span>
+                  <div class="progression"><i style="width:84%"></i></div>
+                </div>
+                <div class="plan">
+                  <div><span>Aujourd'hui</span><span>42 cartes · 20 min</span></div>
+                  <div><span>Demain</span><span>37 cartes · 18 min</span></div>
+                  <div><span>Samedi</span><span>45 cartes · 22 min</span></div>
+                </div>
+                <div class="onglets"><span><svg><use href="#o-accueil"/></svg>Accueil</span><span><svg><use href="#o-notes"/></svg>Notes</span><span class="actif"><svg><use href="#o-reviser"/></svg>Réviser</span><span><svg><use href="#o-focus"/></svg>Focus</span><span><svg><use href="#o-collection"/></svg>Collection</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trois formes -->
+  <section class="section" id="cartes" aria-labelledby="titre-cartes">
+    <div class="enveloppe">
+      <div class="section-tete">
+        <p class="surtitre revele">Trois formes de cartes</p>
+        <h2 class="titre-anime" id="titre-cartes">La bonne question pour chaque notion.</h2>
+        <p class="revele">Essaie-les ici : elles marchent comme dans l'app.</p>
+      </div>
+      <div class="formes">
+        <div class="forme revele">
+          <div class="plateau incline">
+            <button class="retourne" id="retourne" aria-label="Retourner la carte : question et réponse">
+              <span class="face">
+                <span class="surtitre" style="font-size:11px">Droit</span>
+                <span class="question">Quel texte de 1789 proclame les droits naturels de l'homme ?</span>
+                <span class="indice">Touche la carte pour voir la réponse</span>
+              </span>
+              <span class="face dos">
+                <span class="surtitre" style="font-size:11px">Réponse</span>
+                <span class="question">La Déclaration des droits de l'homme et du citoyen.</span>
+                <span class="indice">Touche de nouveau pour revenir</span>
+              </span>
+            </button>
+          </div>
+          <h3>Question et réponse</h3>
+          <p class="attenue">Pour une définition, une date, une notion à expliquer.</p>
+        </div>
+        <div class="forme revele">
+          <div class="boite incline">
+            <span class="surtitre" style="font-size:11px">Chimie</span>
+            <p class="question">À 25 °C, le pH d'une solution neutre vaut <button class="trou cache" id="trou-chimie" aria-label="Révéler le mot caché">7</button>.</p>
+            <span class="indice" id="indice-trou">Touche le passage caché</span>
+          </div>
+          <h3>Texte à trous</h3>
+          <p class="attenue">La phrase de ton cours, avec le mot clé caché.</p>
+        </div>
+        <div class="forme revele">
+          <div class="boite incline">
+            <span class="surtitre" style="font-size:11px">Espagnol</span>
+            <p class="question" style="font-size:18px">Quel verbe traduit « être » pour une caractéristique durable ?</p>
+            <div class="choix" id="qcm">
+              <button data-juste="false">estar <em></em></button>
+              <button data-juste="true">ser <em></em></button>
+              <button data-juste="false">haber <em></em></button>
+            </div>
+          </div>
+          <h3>QCM</h3>
+          <p class="attenue">Tu vois tout de suite la bonne réponse, et tes erreurs reviennent plus tard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rigueur -->
+  <section class="section" style="padding-top:0" aria-labelledby="titre-rigueur">
+    <div class="enveloppe rigueur">
+      <div class="section-tete">
+        <p class="surtitre revele">Des cartes justes</p>
+        <h2 class="titre-anime" id="titre-rigueur">Une carte floue, c'est du temps perdu.</h2>
+        <p class="revele">Pendant que tu écris, NoteFarm relit tes cartes avec toi. Une question ambiguë, un contexte qui manque, un doublon : il te le signale, et c'est toi qui décides. Aucune carte ne dit ce que tu n'as pas écrit.</p>
+      </div>
+      <div class="controle revele">
+        <div class="carte-ligne">
+          <span class="etiquette avant">Avant</span>
+          <span class="q">Quand a eu lieu la révolution ?</span>
+        </div>
+        <div class="signal">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M10 6v5M10 14h.01"/></svg>
+          <span>Question ambiguë : de quelle révolution s'agit-il ? Ajoute le contexte pour qu'une seule réponse soit possible.</span>
+        </div>
+        <div class="carte-ligne corrigee">
+          <span class="etiquette">Après</span>
+          <span class="q">En quelle année commence la Révolution française ?</span>
+          <span class="attenue" style="font-size:15px">1789</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mémoire -->
+  <section class="section memoire" id="memoire" aria-labelledby="titre-memoire">
+    <div class="enveloppe">
+      <div class="section-tete">
+        <p class="surtitre revele">Révision espacée</p>
+        <h2 class="titre-anime" id="titre-memoire">Réviser moins souvent, retenir plus longtemps.</h2>
+        <p class="revele">Sans rappel, un souvenir s'efface vite. Chaque révision au bon moment le rend plus solide, et la suivante peut attendre un peu plus.</p>
+      </div>
+      <div class="courbe-cadre revele" id="courbe">
+        <svg viewBox="0 0 800 300" role="img" aria-label="Courbe illustrative : sans révision, le souvenir chute ; avec des rappels de plus en plus espacés, il reste haut.">
+          <line x1="40" y1="260" x2="780" y2="260" stroke="var(--filet)" stroke-width="1"/>
+          <line x1="40" y1="30" x2="40" y2="260" stroke="var(--filet)" stroke-width="1"/>
+          <text x="40" y="20" fill="var(--attenue)" font-size="13" font-family="Albert Sans, sans-serif">Souvenir</text>
+          <text x="780" y="284" fill="var(--attenue)" font-size="13" text-anchor="end" font-family="Albert Sans, sans-serif">Temps</text>
+          <path class="trace-courbe" id="courbe-sans" pathLength="1" d="M40 40 C 90 150, 160 210, 300 236 S 600 252, 780 254" fill="none" stroke="var(--sauge)" stroke-width="2"/>
+          <path class="trace-courbe" id="courbe-avec" pathLength="1" d="M40 40 C 60 70, 80 86, 110 92 L110 44 C 150 70, 190 86, 240 90 L240 46 C 310 66, 380 80, 450 84 L450 48 C 560 62, 670 72, 780 76" fill="none" stroke="var(--jade)" stroke-width="3" stroke-linejoin="round"/>
+          <g class="rappel" fill="var(--laiton)">
+            <circle cx="110" cy="44" r="6" data-seuil=".2"/>
+            <circle cx="240" cy="46" r="6" data-seuil=".42"/>
+            <circle cx="450" cy="48" r="6" data-seuil=".68"/>
+          </g>
+          <g class="rappel" fill="var(--attenue)" font-size="12" font-family="Albert Sans, sans-serif" text-anchor="middle">
+            <text x="110" y="282" data-seuil=".2">J+1</text><text x="240" y="282" data-seuil=".42">J+4</text><text x="450" y="282" data-seuil=".68">J+12</text>
+          </g>
+        </svg>
+        <div class="legende">
+          <span><i></i>Sans révision</span>
+          <span><i class="jade"></i>Avec NoteFarm</span>
+          <span><i class="point"></i>Révision</span>
+          <span>Courbe illustrative</span>
+        </div>
+      </div>
+      <div class="chiffres">
+        <div class="revele"><b>FSRS</b><span>Un algorithme moderne de révision espacée, à code ouvert.</span></div>
+        <div class="revele"><b>4 boutons</b><span>Encore, Difficile, Bien, Facile : ta réponse fixe la prochaine date.</span></div>
+        <div class="revele"><b class="touches" id="touches"><kbd>Espace</kbd><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd></b><span>Sur ordinateur, tu révises sans lâcher le clavier.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Focus -->
+  <section class="section" id="focus" aria-labelledby="titre-focus">
+    <div class="enveloppe focus-grille">
+      <div class="anneau revele" id="anneau" aria-hidden="true">
+        <span class="respire"></span>
+        <svg viewBox="0 0 200 200"><circle class="piste-anneau" cx="100" cy="100" r="92" fill="none" stroke-width="3"/><circle class="arc" id="arc" cx="100" cy="100" r="92" fill="none" stroke-width="3.5" stroke-linecap="round" pathLength="1500" stroke-dasharray="1500" stroke-dashoffset="0"/></svg>
+        <div class="centre"><span class="temps" id="temps">25:00</span><span class="phase">Travail</span></div>
+      </div>
+      <div class="focus-texte">
+        <p class="surtitre revele">Focus</p>
+        <h2 class="grand-titre titre-anime" id="titre-focus" style="margin-top:18px">Travaille par périodes, au calme.</h2>
+        <p class="revele">Un minuteur Pomodoro tout simple : 25 minutes de travail, puis une vraie pause.</p>
+        <ul class="liste-calme revele">
+          <li><span><b>Une pause qui repose</b> : une respiration lente à suivre, si tu en as envie.</span></li>
+          <li><span><b>Un rappel discret</b> à la fin de chaque période, même pendant ta révision.</span></li>
+          <li><span><b>Des éclats</b> pour ta collection, à chaque période terminée.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collection -->
+  <section class="section collection" id="collection" aria-labelledby="titre-collection">
+    <div class="enveloppe collection-grille">
+      <div class="collection-texte">
+        <p class="surtitre revele">Collection</p>
+        <h2 class="grand-titre titre-anime" id="titre-collection" style="margin-top:18px">Chaque révision fait pousser ta collection.</h2>
+        <p class="revele">Réviser, finir une série ou un focus te rapporte des éclats. Avec eux, tu ouvres des boosters de cartes illustrées, pleines d'humour étudiant, à ranger dans ton album.</p>
+        <p class="attenue revele">Rien ne s'achète pour gagner : la collection récompense ton travail. Et si ça ne te dit rien, tu peux l'ignorer.</p>
+        <div class="compteur revele">
+          <span class="eclats"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0 L12 7 L7 14 L2 7 Z" fill="currentColor"/></svg><span id="eclats">120</span> éclats</span>
+          <button class="bouton" id="ouvrir-booster">Ouvrir un booster</button>
+        </div>
+      </div>
+      <div class="table-booster" id="table-booster">
+        <div class="carte-collec c1"><div class="interieur"><div class="verso"></div><div class="recto"><div class="illu"><svg viewBox="0 0 60 60" fill="none" stroke="var(--jade)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><rect x="12" y="10" width="36" height="42" rx="4"/><path d="M20 22h20M20 30h20M20 38h12"/></svg></div><div><div class="nom">La fiche parfaite</div><div class="rarete">Commune</div></div></div></div></div>
+        <div class="carte-collec c2"><div class="interieur"><div class="verso"></div><div class="recto"><div class="illu"><svg viewBox="0 0 60 60" fill="none" stroke="var(--jade)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="30" cy="32" r="18"/><path d="M30 22v10l7 5M25 8h10"/></svg></div><div><div class="nom">Le réveil de 6 h</div><div class="rarete">Peu commune</div></div></div></div></div>
+        <div class="carte-collec c3 rare" id="carte-rare"><div class="interieur"><div class="verso"></div><div class="recto"><div class="illu"><svg viewBox="22 10 86 96" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M72 22 H34 A8 8 0 0 0 26 30 V94 A8 8 0 0 0 34 102 H86 A8 8 0 0 0 94 94 V44" stroke="var(--laiton)" stroke-width="6"/><path d="M74 42 C72 24 84 12 104 10 C106 30 94 42 74 42 Z" fill="var(--laiton)"/></svg></div><div><div class="nom">La carte qui germe</div><div class="rarete">Rare</div></div></div></div></div>
+        <div class="booster" aria-hidden="true"><svg viewBox="22 10 86 96" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M72 22 H34 A8 8 0 0 0 26 30 V94 A8 8 0 0 0 34 102 H86 A8 8 0 0 0 94 94 V44" stroke="var(--laiton)" stroke-width="6"/><path d="M74 42 C72 24 84 12 104 10 C106 30 94 42 74 42 Z" fill="var(--laiton)"/></svg></div>
+        <p class="lecteur" id="annonce-booster" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ordinateur -->
+  <section class="section" id="ordinateur" aria-labelledby="titre-ordinateur">
+    <div class="enveloppe ordinateur">
+      <div class="section-tete" style="margin-bottom:24px">
+        <p class="surtitre revele">Sur grand écran</p>
+        <h2 class="titre-anime" id="titre-ordinateur">Ton cours et tes cartes, côte à côte.</h2>
+        <p class="revele">Sur ordinateur, tes classeurs, ta note et ses cartes tiennent sur un seul écran. Mac et Windows arriveront avec la synchronisation.</p>
+      </div>
+      <div class="cadre-pc" id="cadre-pc">
+        <div class="cadre-defile">
+          <div class="ecran-pc" aria-hidden="true">
+            <div class="int">
+              <div class="col lat">
+                <span class="marque"><svg><use href="#embleme"/></svg>NoteFarm</span>
+                <span class="ligne"><svg><use href="#o-accueil"/></svg>Accueil</span><span class="ligne sel"><svg><use href="#o-notes"/></svg>Notes</span><span class="ligne"><svg><use href="#o-reviser"/></svg>Réviser</span><span class="ligne"><svg><use href="#o-focus"/></svg>Focus</span><span class="ligne"><svg><use href="#o-collection"/></svg>Collection</span>
+              </div>
+              <div class="col">
+                <span class="titre-col">Classeurs</span>
+                <span class="ligne sel">Économie</span><span class="ligne">Histoire contemporaine</span><span class="ligne">Chimie organique</span><span class="ligne">Espagnol</span><span class="ligne">Droit constitutionnel</span>
+              </div>
+              <div class="doc">
+                <span class="chemin attenue" style="font-size:12px">Économie · Chapitre 4</span>
+                <h4>L'inflation</h4>
+                <p>Hausse <b style="color:var(--encre)">durable et générale</b> du niveau des prix. En France, l'Insee la mesure avec l'<span class="trou">indice des prix à la consommation</span>.</p>
+                <p>La BCE vise une inflation de <span class="trou">2 %</span> à moyen terme. Au-delà, le pouvoir d'achat des ménages recule si les salaires ne suivent pas.</p>
+              </div>
+              <div class="col">
+                <span class="titre-col">Cartes de la note</span>
+                <div class="mini-carte">Avec quel indice l'Insee mesure-t-il l'inflation ?</div>
+                <div class="mini-carte">Quel taux d'inflation la BCE vise-t-elle à moyen terme ?</div>
+                <div class="mini-carte">Inflation : définition</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confiance -->
+  <section class="section" id="confiance" style="padding-top:0" aria-labelledby="titre-confiance">
+    <div class="enveloppe">
+      <div class="section-tete">
+        <p class="surtitre revele">Vie privée</p>
+        <h2 class="titre-anime" id="titre-confiance">Tes notes sont à toi.</h2>
+        <p class="revele">NoteFarm fonctionne sans serveur : tes notes ne quittent pas ton téléphone, et elles y sont gardées dans une base chiffrée.</p>
+      </div>
+      <div class="confiance revele">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          <h3>Chiffré sur ton téléphone</h3>
+          <p>La clé reste dans le coffre sécurisé de ton téléphone.</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/><path d="M3 3l18 18"/></svg>
+          <h3>Sans compte</h3>
+          <p>Tu ouvres l'app et tu écris. Pas d'inscription, pas de mot de passe.</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          <h3>Tes données te suivent</h3>
+          <p>Sauvegarde complète, export en Markdown, decks compatibles Anki.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bêta -->
+  <section class="beta" id="beta" aria-labelledby="titre-beta">
+    <div class="enveloppe">
+      <p class="surtitre revele">Bêta</p>
+      <h2 class="titre-anime" id="titre-beta">Fais partie des <em>premiers.</em></h2>
+      <p class="accroche revele">Je construis NoteFarm seul, et je cherche une trentaine de testeurs sur Android, et autant sur iPhone, pour l'essayer avant sa sortie. Laisse ton prénom, ton téléphone et ton e-mail : tu recevras ton invitation dès l'ouverture de la bêta. Ce que tu en penseras décidera de la suite.</p>
+      <div id="zone-formulaire" style="display:grid;justify-items:center;width:100%">
+        <form class="formulaire revele" id="formulaire" novalidate>
+          <div class="ligne-champs">
+            <label class="champ-texte" for="prenom">
+              <span>Ton prénom</span>
+              <input id="prenom" name="prenom" type="text" autocomplete="given-name" maxlength="60" required>
+            </label>
+            <fieldset class="systeme" id="systeme">
+              <legend class="legende-champ">Ton téléphone</legend>
+              <div class="choix-systeme">
+                <input type="radio" name="systeme" id="systeme-android" value="android" required>
+                <label for="systeme-android"><svg aria-hidden="true"><use href="#p-android"/></svg>Android</label>
+                <input type="radio" name="systeme" id="systeme-iphone" value="iphone">
+                <label for="systeme-iphone"><svg aria-hidden="true"><use href="#p-iphone"/></svg>iPhone</label>
+              </div>
+              <p class="note-systeme" id="note-systeme" aria-live="polite"></p>
+            </fieldset>
+            <label class="champ-texte" for="courriel">
+              <span>Ton adresse e-mail</span>
+              <input id="courriel" name="courriel" type="email" autocomplete="email" inputmode="email" placeholder="prenom@exemple.fr" maxlength="200" required>
+            </label>
+          </div>
+          <label class="accord" for="accord">
+            <input id="accord" name="accord" type="checkbox" required>
+            <span>J'accepte de recevoir les e-mails de la bêta de NoteFarm : la confirmation, puis l'invitation. Mon prénom, mon téléphone et mon adresse ne servent qu'à ça, et je peux me désinscrire en un clic. <a href="confidentialite.html">Politique de confidentialité</a></span>
+          </label>
+          <p class="message" id="message" role="alert"></p>
+          <button class="bouton" type="submit">Je participe</button>
+          <p class="places">Une trentaine de places par téléphone. Quand elles sont prises, tu passes en liste d'attente, et on t'écrit si de nouvelles places ouvrent.</p>
+        </form>
+      </div>
+      <p class="fondateurs revele">Les testeurs deviennent <b>membres fondateurs</b> : un badge, un pseudo à part dans les futurs groupes, et une réduction tant que ton abonnement reste actif.</p>
+      <div class="engagements revele">
+        <span>Ce qui est gratuit le reste</span>
+        <span>Le compte reste facultatif</span>
+        <span>Jamais de publicité</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bientôt -->
+  <section class="bientot" aria-labelledby="titre-bientot">
+    <div class="enveloppe">
+      <div class="bientot-tete revele">
+        <h2 id="titre-bientot">NoteFarm grandit avec toi.</h2>
+        <p>Ce qui arrive ensuite, sans date : on l'annonce quand c'est prêt.</p>
+      </div>
+      <ul class="a-venir">
+        <li class="revele"><svg aria-hidden="true"><use href="#p-synchro"/></svg><b>Synchronisation</b>Tes notes sur tous tes appareils.</li>
+        <li class="revele"><svg aria-hidden="true"><use href="#p-mac"/></svg><b>Mac</b>Avec la synchronisation.</li>
+        <li class="revele"><svg aria-hidden="true"><use href="#p-windows"/></svg><b>Windows</b>Avec la synchronisation.</li>
+        <li class="revele"><svg aria-hidden="true"><use href="#p-web"/></svg><b>Web</b>Avec la synchronisation.</li>
+        <li class="revele"><svg aria-hidden="true"><use href="#p-promo"/></svg><b>Decks de promo</b>Corrigés pour tout le monde.</li>
+      </ul>
+    </div>
+  </section>
 </main>
+
+<footer id="pied">
+  <div class="enveloppe">
+    <span class="marque" style="font-size:16px"><svg aria-hidden="true" style="width:22px;height:22px"><use href="#embleme"/></svg>NoteFarm</span>
+    <span>Réviser. Retenir. Grandir.</span>
+    <div class="liens">
+      <!-- Lien TikTok : à ajouter ici quand le compte sera ouvert. -->
+      <a href="confidentialite.html">Politique de confidentialité</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="mailto:contact@notefarm.app">contact@notefarm.app</a>
+    </div>
+  </div>
+</footer>
+
+<script src="vitrine.js" defer></script>
 </body>
 </html>
